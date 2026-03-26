@@ -58,3 +58,17 @@ body {
     color: #f39c12;
     font-weight: bold;
 }
+
+/* ==========================================
+   ПОВІДОМЛЕННЯ (Завантаження та Помилки)
+   ========================================== */
+.status-message {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.error-message {
+    color: #dc3545; /* Червоний колір для помилки */
+}

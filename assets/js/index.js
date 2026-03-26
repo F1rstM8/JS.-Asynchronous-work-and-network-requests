@@ -1,7 +1,12 @@
-const container = document.querySelector("#products-container");
+const container = document.getElementById("products-container");
 function fetchProducts() {
-  container.innerHTML =
-    '<p class="loading-text" style="text-align: center;">Завантажуємо товари...</p>';
+  container.textContent = "";
+
+  const loadingMsg = document.createElement("p");
+  loadingMsg.classList.add("status-message");
+  loadingMsg.textContent = "Завантажуємо товари...";
+  container.append(loadingMsg);
+
   fetch("https://fakestoreapi.com/products")
     .then((response) => {
       if (!response.ok) {
@@ -14,8 +19,13 @@ function fetchProducts() {
     })
     .catch((error) => {
       console.error("Сталася помилка:", error);
-      container.innerHTML =
-        '<p style="color: red; text-align: center;">Помилка завантаження. Спробуйте пізніше.</p>';
+
+      container.textContent = "";
+
+      const errorMsg = document.createElement("p");
+      errorMsg.classList.add("status-message", "error-message");
+      errorMsg.textContent = "Помилка завантаження. Спробуйте пізніше.";
+      container.append(errorMsg);
     });
 }
 function renderCards(productsList) {
@@ -43,4 +53,8 @@ function renderCards(productsList) {
     container.append(card);
   });
 }
-fetchProducts();
+if (container) {
+  fetchProducts();
+} else {
+  console.warn("Увага: Контейнер #products-container не знайдено на сторінці.");
+}
